@@ -1,8 +1,10 @@
 package com.zx.proxy;
 
+import javax.annotation.Resource;
 import java.lang.reflect.Proxy;
 
 public class Test {
+    @Resource
     private SortService s1;
     public static void main(String [] args)
     {

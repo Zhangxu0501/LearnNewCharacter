@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+    <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
+    <bean name="sortService" class="com.zx.proxy.SortServiceImpl"></bean>
+    <bean name="tcpMessage" class="com.zx.aop.aop.service.TcpMessage"></bean>
+    <bean name="udpMessage" class="com.zx.aop.aop.service.UdpMessage"></bean>
+    <bean name="logService" class="com.zx.aop.aop.service.LogService"></bean>
+    <bean name="timeService" class="com.zx.aop.aop.service.TimeService"></bean>
+    <aop:config>
+        <aop:aspect id="time" ref="timeService" order="2">
+            <aop:pointcut id="timePoint" expression="execution(* com.zx.aop.aop.service.Message.sendMessage())"></aop:pointcut>
+            <aop:before method="getTime" pointcut-ref="timePoint"></aop:before>
+            <aop:after method="getTime" pointcut-ref="timePoint"></aop:after>
+        </aop:aspect>
+        <aop:aspect id="log" ref="logService" order="1">
+            <aop:pointcut id="logPoint" expression="execution(* com.zx.aop.aop.service.Message.sendMessage())"></aop:pointcut>
+            <aop:before method="log" pointcut-ref="logPoint"></aop:before>
+            <aop:after method="log" pointcut-ref="logPoint"></aop:after>
+        </aop:aspect>
+    </aop:config>
+</beans>
