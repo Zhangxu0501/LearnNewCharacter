@@ -7,7 +7,9 @@
         http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
         http://www.springframework.org/schema/aop
         http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+    <!--autowired支持-->
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+    <!--resource支持-->
     <bean class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor"/>
     <bean name="sortService" class="com.zx.proxy.SortServiceImpl"></bean>
     <bean name="tcpMessage" class="com.zx.aop.aop.service.TcpMessage"></bean>

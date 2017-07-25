@@ -8,7 +8,7 @@ public class Test {
     public static void main(String [] args)
     {
         ApplicationContext context = new FileSystemXmlApplicationContext("beans.xml");
-        Message tcpMessage =(Message)context.getBean("tcpMessage");
+        Message tcpMessage =(Message) context.getBean("tcpMessage");
 
         Message udpMessage=(Message)context.getBean("udpMessage");
 
